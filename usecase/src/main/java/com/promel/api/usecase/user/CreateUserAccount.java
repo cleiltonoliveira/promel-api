@@ -1,4 +1,4 @@
-package com.promei.api.usecase.user;
+package com.promel.api.usecase.user;
 
 import com.promel.api.model.UserAccount;
 

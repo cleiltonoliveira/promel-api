@@ -1,10 +1,10 @@
-package com.promei.api.usecase.user.impl;
+package com.promel.api.usecase.user.impl;
 
-import com.promei.api.exception.ResourceConflictException;
-import com.promei.api.repository.UserAccountRepository;
-import com.promei.api.repository.UserAuthRepository;
-import com.promei.api.usecase.role.FindRole;
-import com.promei.api.usecase.user.CreateUserAccount;
+import com.promel.api.exception.ResourceConflictException;
+import com.promel.api.repository.UserAccountRepository;
+import com.promel.api.repository.UserAuthRepository;
+import com.promel.api.usecase.role.FindRole;
+import com.promel.api.usecase.user.CreateUserAccount;
 import com.promel.api.model.UserAccount;
 import com.promel.api.model.UserAuth;
 

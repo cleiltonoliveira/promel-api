@@ -1,4 +1,4 @@
-package com.promei.api.repository;
+package com.promel.api.repository;
 
 import com.promel.api.model.UserAuth;
 

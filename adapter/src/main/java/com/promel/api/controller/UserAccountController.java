@@ -1,6 +1,6 @@
 package com.promel.api.controller;
 
-import com.promei.api.usecase.user.CreateUserAccount;
+import com.promel.api.usecase.user.CreateUserAccount;
 import com.promel.api.dto.transport.request.UserAccountInput;
 import com.promel.api.dto.transport.response.UserAccountOutput;
 import com.promel.api.model.UserAccount;

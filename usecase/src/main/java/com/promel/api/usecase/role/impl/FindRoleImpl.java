@@ -1,8 +1,8 @@
-package com.promei.api.usecase.role.impl;
+package com.promel.api.usecase.role.impl;
 
-import com.promei.api.exception.InternalErrorException;
-import com.promei.api.repository.RoleRepository;
-import com.promei.api.usecase.role.FindRole;
+import com.promel.api.exception.InternalErrorException;
+import com.promel.api.repository.RoleRepository;
+import com.promel.api.usecase.role.FindRole;
 import com.promel.api.model.Role;
 
 import javax.inject.Inject;

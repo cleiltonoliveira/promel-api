@@ -1,4 +1,4 @@
-package com.promei.api.exception;
+package com.promel.api.exception;
 
 public class InternalErrorException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.promei.api.usecase.role;
+package com.promel.api.usecase.role;
 
 import com.promel.api.model.Role;
 
