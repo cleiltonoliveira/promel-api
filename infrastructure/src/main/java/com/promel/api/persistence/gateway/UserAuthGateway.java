@@ -1,9 +1,9 @@
-package com.promel.api.gateway;
+package com.promel.api.persistence.gateway;
 
-import com.promel.api.entity.UserAuth;
+import com.promel.api.persistence.entity.UserAuth;
 import com.promel.api.persistence.entity.UserAuthEntity;
 import com.promel.api.persistence.repository.JpaUserAuthRepository;
-import com.promel.api.repository.UserAuthRepository;
+import com.promel.api.persistence.repository.UserAuthRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

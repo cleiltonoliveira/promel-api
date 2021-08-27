@@ -1,4 +1,4 @@
-package com.promel.api.entity;
+package com.promel.api.persistence.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
