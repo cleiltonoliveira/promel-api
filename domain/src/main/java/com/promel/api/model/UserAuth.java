@@ -6,7 +6,7 @@ public class UserAuth {
     private Long id;
     private String password;
     private String email;
-    private com.promel.api.entity.Role role;
+    private Role role;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class UserAuth {
         this.email = email;
     }
 
-    public com.promel.api.entity.Role getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(com.promel.api.entity.Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
