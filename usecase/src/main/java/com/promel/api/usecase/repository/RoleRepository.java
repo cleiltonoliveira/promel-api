@@ -1,4 +1,4 @@
-package com.promel.api.repository;
+package com.promel.api.usecase.repository;
 
 import com.promel.api.domain.model.Role;
 

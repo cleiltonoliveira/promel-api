@@ -1,6 +1,6 @@
 package com.promel.api.persistence.gateway;
 
-import com.promel.api.repository.RoleRepository;
+import com.promel.api.usecase.repository.RoleRepository;
 import com.promel.api.persistence.entity.RoleEntity;
 import com.promel.api.domain.model.Role;
 import com.promel.api.persistence.repository.JpaRoleEntityRepository;

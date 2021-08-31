@@ -1,4 +1,4 @@
-package com.promel.api.exception;
+package com.promel.api.usecase.exception;
 
 public class ResourceConflictException extends RuntimeException {
 

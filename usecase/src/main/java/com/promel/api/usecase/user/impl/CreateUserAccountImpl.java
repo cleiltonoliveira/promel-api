@@ -1,8 +1,8 @@
 package com.promel.api.usecase.user.impl;
 
-import com.promel.api.exception.ResourceConflictException;
-import com.promel.api.repository.UserAccountRepository;
-import com.promel.api.repository.UserAuthRepository;
+import com.promel.api.usecase.exception.ResourceConflictException;
+import com.promel.api.usecase.repository.UserAccountRepository;
+import com.promel.api.usecase.repository.UserAuthRepository;
 import com.promel.api.usecase.role.FindRole;
 import com.promel.api.usecase.user.CreateUserAccount;
 import com.promel.api.domain.model.UserAccount;
