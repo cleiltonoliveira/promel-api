@@ -1,4 +1,4 @@
-package com.promel.api.model;
+package com.promel.api.domain.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

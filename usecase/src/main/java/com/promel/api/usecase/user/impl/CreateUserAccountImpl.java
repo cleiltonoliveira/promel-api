@@ -5,8 +5,8 @@ import com.promel.api.repository.UserAccountRepository;
 import com.promel.api.repository.UserAuthRepository;
 import com.promel.api.usecase.role.FindRole;
 import com.promel.api.usecase.user.CreateUserAccount;
-import com.promel.api.model.UserAccount;
-import com.promel.api.model.UserAuth;
+import com.promel.api.domain.model.UserAccount;
+import com.promel.api.domain.model.UserAuth;
 
 import javax.inject.Inject;
 import javax.inject.Named;

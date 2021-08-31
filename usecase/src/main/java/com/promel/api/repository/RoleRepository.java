@@ -1,6 +1,6 @@
 package com.promel.api.repository;
 
-import com.promel.api.model.Role;
+import com.promel.api.domain.model.Role;
 
 import java.util.Optional;
 

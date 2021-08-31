@@ -3,7 +3,7 @@ package com.promel.api.controller;
 import com.promel.api.usecase.user.CreateUserAccount;
 import com.promel.api.dto.transport.request.UserAccountInput;
 import com.promel.api.dto.transport.response.UserAccountOutput;
-import com.promel.api.model.UserAccount;
+import com.promel.api.domain.model.UserAccount;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -3,7 +3,7 @@ package com.promel.api.usecase.role.impl;
 import com.promel.api.exception.InternalErrorException;
 import com.promel.api.repository.RoleRepository;
 import com.promel.api.usecase.role.FindRole;
-import com.promel.api.model.Role;
+import com.promel.api.domain.model.Role;
 
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -1,7 +1,7 @@
 package com.promel.api.persistence.gateway;
 
 import com.promel.api.repository.UserAuthRepository;
-import com.promel.api.model.UserAuth;
+import com.promel.api.domain.model.UserAuth;
 import com.promel.api.persistence.entity.UserAuthEntity;
 import com.promel.api.persistence.repository.JpaUserAuthRepository;
 import org.modelmapper.ModelMapper;

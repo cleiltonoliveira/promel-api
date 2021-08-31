@@ -1,6 +1,6 @@
 package com.promel.api.repository;
 
-import com.promel.api.model.UserAccount;
+import com.promel.api.domain.model.UserAccount;
 
 import java.util.List;
 import java.util.Optional;
