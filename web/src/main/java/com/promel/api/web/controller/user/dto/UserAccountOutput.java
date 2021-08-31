@@ -1,4 +1,4 @@
-package com.promel.api.dto.transport.response;
+package com.promel.api.web.controller.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

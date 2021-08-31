@@ -1,8 +1,8 @@
-package com.promel.api.controller;
+package com.promel.api.web.controller.user;
 
 import com.promel.api.usecase.user.CreateUserAccount;
-import com.promel.api.dto.transport.request.UserAccountInput;
-import com.promel.api.dto.transport.response.UserAccountOutput;
+import com.promel.api.web.controller.user.dto.UserAccountInput;
+import com.promel.api.web.controller.user.dto.UserAccountOutput;
 import com.promel.api.domain.model.UserAccount;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
