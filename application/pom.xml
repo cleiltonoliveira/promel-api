@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.promel</groupId>
-            <artifactId>adapter</artifactId>
+            <artifactId>web</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
