@@ -1,11 +1,11 @@
-package com.promel.api.usecase.repository;
+package com.promel.api.usecase.user.adapter;
 
 import com.promel.api.domain.model.UserAccount;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserAccountRepository {
+public interface UserAccountAdapter {
 
     UserAccount save(UserAccount userAccount);
 

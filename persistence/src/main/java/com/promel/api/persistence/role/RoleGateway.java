@@ -1,6 +1,6 @@
 package com.promel.api.persistence.role;
 
-import com.promel.api.usecase.repository.RoleRepository;
+import com.promel.api.usecase.role.adapter.RoleAdapter;
 import com.promel.api.domain.model.Role;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class RoleGateway implements RoleRepository {
+public class RoleGateway implements RoleAdapter {
 
     private JpaRoleEntityRepository repository;
     private ModelMapper modelMapper;

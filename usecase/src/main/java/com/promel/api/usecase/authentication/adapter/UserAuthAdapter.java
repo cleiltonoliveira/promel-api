@@ -1,10 +1,10 @@
-package com.promel.api.usecase.repository;
+package com.promel.api.usecase.authentication.adapter;
 
 import com.promel.api.domain.model.UserAuth;
 
 import java.util.Optional;
 
-public interface UserAuthRepository {
+public interface UserAuthAdapter {
 
     boolean existsByEmail(String email);
 

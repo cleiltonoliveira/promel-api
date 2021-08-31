@@ -1,8 +1,8 @@
 package com.promel.api.usecase.user.impl;
 
 import com.promel.api.usecase.exception.ResourceConflictException;
-import com.promel.api.usecase.repository.UserAccountRepository;
-import com.promel.api.usecase.repository.UserAuthRepository;
+import com.promel.api.usecase.user.adapter.UserAccountAdapter;
+import com.promel.api.usecase.authentication.adapter.UserAuthAdapter;
 import com.promel.api.usecase.role.FindRole;
 import com.promel.api.usecase.user.CreateUserAccount;
 import com.promel.api.domain.model.UserAccount;
@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 
 @Named
 public class CreateUserAccountImpl implements CreateUserAccount {
-    private UserAccountRepository userAccountRepository;
-    private UserAuthRepository userAuthRepository;
+    private UserAccountAdapter userAccountRepository;
+    private UserAuthAdapter userAuthRepository;
     private FindRole findRole;
 
     @Inject
-    public CreateUserAccountImpl(UserAccountRepository userAccountRepository, UserAuthRepository userAuthRepository, FindRole findRole) {
+    public CreateUserAccountImpl(UserAccountAdapter userAccountRepository, UserAuthAdapter userAuthRepository, FindRole findRole) {
         this.userAccountRepository = userAccountRepository;
         this.userAuthRepository = userAuthRepository;
         this.findRole = findRole;

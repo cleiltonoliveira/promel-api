@@ -1,7 +1,7 @@
 package com.promel.api.usecase.role.impl;
 
 import com.promel.api.usecase.exception.InternalErrorException;
-import com.promel.api.usecase.repository.RoleRepository;
+import com.promel.api.usecase.role.adapter.RoleAdapter;
 import com.promel.api.usecase.role.FindRole;
 import com.promel.api.domain.model.Role;
 
@@ -11,10 +11,10 @@ import javax.inject.Named;
 @Named
 public class FindRoleImpl implements FindRole {
 
-    private RoleRepository roleRepository;
+    private RoleAdapter roleRepository;
 
     @Inject
-    public FindRoleImpl(RoleRepository roleRepository) {
+    public FindRoleImpl(RoleAdapter roleRepository) {
         this.roleRepository = roleRepository;
     }
 

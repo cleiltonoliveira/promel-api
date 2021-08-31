@@ -1,6 +1,6 @@
 package com.promel.api.persistence.authentication;
 
-import com.promel.api.usecase.repository.UserAuthRepository;
+import com.promel.api.usecase.authentication.adapter.UserAuthAdapter;
 import com.promel.api.domain.model.UserAuth;
 import com.promel.api.persistence.user.JpaUserAuthRepository;
 import org.modelmapper.ModelMapper;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class UserAuthGateway implements UserAuthRepository {
+public class UserAuthGateway implements UserAuthAdapter {
 
     private JpaUserAuthRepository repository;
     private ModelMapper modelMapper;

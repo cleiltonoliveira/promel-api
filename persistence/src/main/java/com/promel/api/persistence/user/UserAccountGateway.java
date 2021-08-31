@@ -1,6 +1,6 @@
 package com.promel.api.persistence.user;
 
-import com.promel.api.usecase.repository.UserAccountRepository;
+import com.promel.api.usecase.user.adapter.UserAccountAdapter;
 import com.promel.api.domain.model.UserAccount;
 import com.promel.api.persistence.authentication.JpaUserAccountRepository;
 import org.modelmapper.ModelMapper;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserAccountGateway implements UserAccountRepository {
+public class UserAccountGateway implements UserAccountAdapter {
 
     private ModelMapper modelMapper;
     private JpaUserAccountRepository repository;
