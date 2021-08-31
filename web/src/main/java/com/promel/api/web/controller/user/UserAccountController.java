@@ -1,6 +1,6 @@
 package com.promel.api.web.controller.user;
 
-import com.promel.api.usecase.user.CreateUserAccount;
+import com.promel.api.usecase.user.UserAccountCreator;
 import com.promel.api.web.controller.user.dto.UserAccountInput;
 import com.promel.api.web.controller.user.dto.UserAccountOutput;
 import com.promel.api.domain.model.UserAccount;
@@ -19,18 +19,18 @@ import javax.validation.Valid;
 @RequestMapping("api/v1")
 public class UserAccountController {
 
-    private CreateUserAccount createUserAccount;
+    private UserAccountCreator userAccountCreator;
     private ModelMapper modelMapper;
 
-    public UserAccountController(CreateUserAccount createUserAccount, ModelMapper modelMapper) {
-        this.createUserAccount = createUserAccount;
+    public UserAccountController(UserAccountCreator userAccountCreator, ModelMapper modelMapper) {
+        this.userAccountCreator = userAccountCreator;
         this.modelMapper = modelMapper;
     }
 
     @PostMapping("public/users")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@RequestBody @Valid UserAccountInput userInput) {
-        var savedUser = createUserAccount.execute(toUserAccountDomain(userInput));
+        var savedUser = userAccountCreator.execute(toUserAccountDomain(userInput));
         return new ResponseEntity<>(toUserAccountOutput(savedUser), HttpStatus.CREATED);
     }
 

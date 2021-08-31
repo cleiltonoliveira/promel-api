@@ -1,33 +1,30 @@
-package com.promel.api.usecase.role.impl;
+package com.promel.api.usecase.role;
 
 import com.promel.api.usecase.exception.InternalErrorException;
 import com.promel.api.usecase.role.adapter.RoleAdapter;
-import com.promel.api.usecase.role.FindRole;
 import com.promel.api.domain.model.Role;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class FindRoleImpl implements FindRole {
+public class RoleFinder{
 
-    private RoleAdapter roleRepository;
+    private RoleAdapter roleAdapter;
 
     @Inject
-    public FindRoleImpl(RoleAdapter roleRepository) {
-        this.roleRepository = roleRepository;
+    public RoleFinder(RoleAdapter roleAdapter) {
+        this.roleAdapter = roleAdapter;
     }
 
-    @Override
     public Role findUserRole() {
-        Role role = roleRepository.findUserRole()
+        Role role = roleAdapter.findUserRole()
                 .orElseThrow(() -> new InternalErrorException("There was an unexpected error"));
         return role;
     }
 
-    @Override
     public Role findAdminRole() {
-        Role role = roleRepository.findAdminRole()
+        Role role = roleAdapter.findAdminRole()
                 .orElseThrow(() -> new InternalErrorException("There was an unexpected error"));
         return role;
     }
