@@ -7,7 +7,7 @@
         <module>domain</module>
         <module>usecase</module>
         <module>adapter</module>
-        <module>infrastructure</module>
+        <module>persistence</module>
         <module>application</module>
     </modules>
     <parent>
@@ -37,11 +37,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
