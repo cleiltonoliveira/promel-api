@@ -1,6 +1,6 @@
-package com.promel.api.persistence.repository;
+package com.promel.api.persistence.user;
 
-import com.promel.api.persistence.entity.UserAuthEntity;
+import com.promel.api.persistence.authentication.UserAuthEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

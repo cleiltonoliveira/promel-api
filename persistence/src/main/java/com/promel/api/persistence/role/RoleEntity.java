@@ -1,4 +1,4 @@
-package com.promel.api.persistence.entity;
+package com.promel.api.persistence.role;
 
 import lombok.Data;
 

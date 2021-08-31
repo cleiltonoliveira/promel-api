@@ -1,5 +1,7 @@
-package com.promel.api.persistence.entity;
+package com.promel.api.persistence.user;
 
+import com.promel.api.persistence.association.AssociationEntity;
+import com.promel.api.persistence.authentication.UserAuthEntity;
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.DynamicUpdate;

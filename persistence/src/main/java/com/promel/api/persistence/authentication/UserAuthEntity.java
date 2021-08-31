@@ -1,5 +1,6 @@
-package com.promel.api.persistence.entity;
+package com.promel.api.persistence.authentication;
 
+import com.promel.api.persistence.role.RoleEntity;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 
