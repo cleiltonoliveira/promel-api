@@ -24,7 +24,7 @@ public class UserAccountCreator {
         this.roleFinder = roleFinder;
     }
 
-    public UserAccount execute(UserAccount userAccount) {
+    public UserAccount create(UserAccount userAccount) {
         verifyIfEmailExists(userAccount.getUserAuth());
         userAccount.getUserAuth().setRole(roleFinder.findUserRole());
         userAccount.setCreationDate(LocalDateTime.now());

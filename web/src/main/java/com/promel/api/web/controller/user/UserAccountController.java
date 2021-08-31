@@ -30,7 +30,7 @@ public class UserAccountController {
     @PostMapping("public/users")
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@RequestBody @Valid UserAccountInput userInput) {
-        var savedUser = userAccountCreator.execute(toUserAccountDomain(userInput));
+        var savedUser = userAccountCreator.create(toUserAccountDomain(userInput));
         return new ResponseEntity<>(toUserAccountOutput(savedUser), HttpStatus.CREATED);
     }
 
