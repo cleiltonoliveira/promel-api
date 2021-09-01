@@ -34,9 +34,7 @@ public class UserAccountCreator {
 
     private void verifyIfEmailExists(UserAuth userAuth) {
         if (userAuthAdapter.existsByEmail(userAuth.getEmail())) {
-            ResourceConflictException ex = new ResourceConflictException("An account already exists with this email");
-            ex.setError("Email unavailable");
-            throw ex;
+            throw new ResourceConflictException("An account already exists with this email");
         }
     }
 }

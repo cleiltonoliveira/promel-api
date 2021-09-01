@@ -1,18 +1,15 @@
 package com.promel.api.usecase.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ResourceConflictException extends RuntimeException {
 
-    private String error;
+    private String details;
 
-    public ResourceConflictException(String message) {
-        super(message);
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
+    public ResourceConflictException(String details) {
+        this.details = details;
     }
 }
