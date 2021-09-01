@@ -6,7 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class UserAuthInput {
+public class UserAuthenticationRequest {
 
     @NotBlank
     private String password;

@@ -1,8 +1,8 @@
 package com.promel.api.web.controller.user;
 
 import com.promel.api.usecase.user.UserAccountCreator;
-import com.promel.api.web.controller.user.dto.UserAccountInput;
-import com.promel.api.web.controller.user.dto.UserAccountOutput;
+import com.promel.api.web.controller.user.dto.UserAccountCreationRequest;
+import com.promel.api.web.controller.user.dto.UserAccountResponse;
 import com.promel.api.domain.model.UserAccount;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -29,16 +29,16 @@ public class UserAccountController {
 
     @PostMapping("public/users")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseEntity<?> save(@RequestBody @Valid UserAccountInput userInput) {
-        var savedUser = userAccountCreator.create(toUserAccountDomain(userInput));
-        return new ResponseEntity<>(toUserAccountOutput(savedUser), HttpStatus.CREATED);
+    public ResponseEntity<?> save(@RequestBody @Valid UserAccountCreationRequest userAccountCreationRequest) {
+        var savedUser = userAccountCreator.create(toUserAccount(userAccountCreationRequest));
+        return new ResponseEntity<>(toUserAccountResponse(savedUser), HttpStatus.CREATED);
     }
 
-    private UserAccount toUserAccountDomain(UserAccountInput userInput) {
-        return modelMapper.map(userInput, UserAccount.class);
+    private UserAccount toUserAccount(UserAccountCreationRequest request) {
+        return modelMapper.map(request, UserAccount.class);
     }
 
-    private UserAccountOutput toUserAccountOutput(UserAccount userAccount) {
-        return modelMapper.map(userAccount, UserAccountOutput.class);
+    private UserAccountResponse toUserAccountResponse(UserAccount userAccount) {
+        return modelMapper.map(userAccount, UserAccountResponse.class);
     }
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class UserAccountOutput {
+public class UserAccountResponse {
     private String name;
     private LocalDateTime creationDate;
     private String phone;

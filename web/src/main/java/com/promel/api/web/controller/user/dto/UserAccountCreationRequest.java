@@ -7,7 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class UserAccountInput {
+public class UserAccountCreationRequest {
     @NotBlank
     private String name;
 
