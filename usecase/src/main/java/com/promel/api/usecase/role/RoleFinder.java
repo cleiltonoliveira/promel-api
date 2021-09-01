@@ -1,6 +1,6 @@
 package com.promel.api.usecase.role;
 
-import com.promel.api.usecase.exception.InternalErrorException;
+import com.promel.api.usecase.exception.ResourceNotFoundException;
 import com.promel.api.usecase.role.adapter.RoleAdapter;
 import com.promel.api.domain.model.Role;
 
@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class RoleFinder{
+public class RoleFinder {
 
     private RoleAdapter roleAdapter;
 
@@ -17,15 +17,8 @@ public class RoleFinder{
         this.roleAdapter = roleAdapter;
     }
 
-    public Role findUserRole() {
-        Role role = roleAdapter.findUserRole()
-                .orElseThrow(() -> new InternalErrorException("There was an unexpected error"));
-        return role;
-    }
-
-    public Role findAdminRole() {
-        Role role = roleAdapter.findAdminRole()
-                .orElseThrow(() -> new InternalErrorException("There was an unexpected error"));
-        return role;
+    public Role findRoleByName(RoleType roleType) {
+        return roleAdapter.findRoleByName(roleType.name())
+                .orElseThrow(() -> new ResourceNotFoundException("No role found for provided name: " + roleType.name()));
     }
 }

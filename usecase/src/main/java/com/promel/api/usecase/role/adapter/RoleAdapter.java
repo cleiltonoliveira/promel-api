@@ -6,7 +6,5 @@ import java.util.Optional;
 
 public interface RoleAdapter {
 
-    Optional<Role> findUserRole();
-
-    Optional<Role> findAdminRole();
+    Optional<Role> findRoleByName(String roleName);
 }

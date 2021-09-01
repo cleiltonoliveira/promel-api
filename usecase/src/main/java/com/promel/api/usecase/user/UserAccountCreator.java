@@ -2,6 +2,7 @@ package com.promel.api.usecase.user;
 
 import com.promel.api.usecase.exception.ResourceConflictException;
 import com.promel.api.usecase.role.RoleFinder;
+import com.promel.api.usecase.role.RoleType;
 import com.promel.api.usecase.user.adapter.UserAccountAdapter;
 import com.promel.api.usecase.authentication.adapter.UserAuthAdapter;
 import com.promel.api.domain.model.UserAccount;
@@ -26,7 +27,7 @@ public class UserAccountCreator {
 
     public UserAccount create(UserAccount userAccount) {
         verifyIfEmailExists(userAccount.getUserAuth());
-        userAccount.getUserAuth().setRole(roleFinder.findUserRole());
+        userAccount.getUserAuth().setRole(roleFinder.findRoleByName(RoleType.ADMIN));
         userAccount.setCreationDate(LocalDateTime.now());
         return userAccountAdapter.save(userAccount);
     }

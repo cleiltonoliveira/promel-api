@@ -20,13 +20,8 @@ public class RoleGateway implements RoleAdapter {
     }
 
     @Override
-    public Optional<Role> findUserRole() {
-        return repository.findUserRole().map(this::toDomain);
-    }
-
-    @Override
-    public Optional<Role> findAdminRole() {
-        return repository.findAdminRole().map(this::toDomain);
+    public Optional<Role> findRoleByName(String roleName) {
+        return repository.findOneByRole(roleName).map(this::toDomain);
     }
 
     private Role toDomain(RoleEntity entity) {
