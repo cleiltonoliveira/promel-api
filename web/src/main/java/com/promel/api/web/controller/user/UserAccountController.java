@@ -7,7 +7,6 @@ import com.promel.api.domain.model.UserAccount;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,6 @@ public class UserAccountController {
     }
 
     @PostMapping("public/users")
-    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@RequestBody @Valid UserAccountCreationRequest userAccountCreationRequest) {
         var savedUser = userAccountCreator.create(toUserAccount(userAccountCreationRequest));
         return new ResponseEntity<>(toUserAccountResponse(savedUser), HttpStatus.CREATED);
