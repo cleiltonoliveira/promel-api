@@ -7,6 +7,7 @@ import org.hibernate.annotations.DynamicInsert;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,7 +29,9 @@ public class UserAuthEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private RoleEntity role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_auth_has_role",
+            joinColumns = {@JoinColumn(name = "user_auth_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private List<RoleEntity> roles;
 }
