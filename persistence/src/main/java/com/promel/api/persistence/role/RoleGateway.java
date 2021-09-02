@@ -13,7 +13,6 @@ public class RoleGateway implements RoleAdapter {
     private RoleRepository repository;
     private ModelMapper modelMapper;
 
-
     public RoleGateway(RoleRepository repository, ModelMapper mapper) {
         this.repository = repository;
         this.modelMapper = mapper;
