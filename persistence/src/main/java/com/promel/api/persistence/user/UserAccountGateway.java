@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class UserAccountGateway implements UserAccountAdapter {
@@ -28,22 +29,22 @@ public class UserAccountGateway implements UserAccountAdapter {
 
     @Override
     public void deleteById(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
     public Optional<UserAccount> findById(Long id) {
-        return Optional.empty();
+        return repository.findById(id).map(this::toDomain);
     }
 
     @Override
     public List<UserAccount> findAll() {
-        return null;
+        return repository.findAll().stream().map(this::toDomain).collect(Collectors.toList());
     }
 
     @Override
     public boolean existsById(Long id) {
-        return false;
+        return repository.existsById(id);
     }
 
     private UserAccount toDomain(UserAccountEntity entity) {
