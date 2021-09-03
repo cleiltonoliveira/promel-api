@@ -11,6 +11,7 @@ import com.promel.api.domain.model.UserAuth;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 @Named
 public class UserAccountCreator {
@@ -27,7 +28,11 @@ public class UserAccountCreator {
 
     public UserAccount create(UserAccount userAccount) {
         verifyIfEmailExists(userAccount.getUserAuth());
-        userAccount.getUserAuth().setRole(roleFinder.findRoleByName(RoleType.USER));
+
+        var roles = new HashSet<String>();
+        roles.add(RoleType.USER.name());
+
+        userAccount.getUserAuth().setRoles(roleFinder.findAllByRoleNames(roles));
         userAccount.setCreationDate(LocalDateTime.now());
         return userAccountAdapter.save(userAccount);
     }
