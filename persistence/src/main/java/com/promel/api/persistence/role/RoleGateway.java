@@ -5,9 +5,9 @@ import com.promel.api.domain.model.Role;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,7 +27,7 @@ public class RoleGateway implements RoleAdapter {
     }
 
     @Override
-    public List<Role> findAllByNames(HashSet<String> roleNames) {
+    public List<Role> findAllByNames(Set<String> roleNames) {
         return repository.findAllByRoleIn(roleNames).stream().map(this::toDomain).collect(Collectors.toList());
     }
 

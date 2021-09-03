@@ -6,7 +6,7 @@ import com.promel.api.domain.model.Role;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashSet;
+import java.util.Set;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +25,7 @@ public class RoleFinder {
                 .orElseThrow(() -> new ResourceNotFoundException("No role found for provided name: " + name));
     }
 
-    public List<Role> findAllByRoleNames(HashSet<String> names) {
+    public List<Role> findAllByRoleNames(Set<String> names) {
         var roles = roleAdapter.findAllByNames(names);
 
         if (roles.size() < names.size()) {
