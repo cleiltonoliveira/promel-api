@@ -1,1 +1,0 @@
-INSERT INTO `promel`.`role` (`role`) VALUES ('ADMIN'), ('USER');
