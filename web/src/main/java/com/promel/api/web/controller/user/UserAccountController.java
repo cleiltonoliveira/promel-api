@@ -7,6 +7,7 @@ import com.promel.api.domain.model.UserAccount;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,16 +21,19 @@ public class UserAccountController {
 
     private UserAccountCreator userAccountCreator;
     private ModelMapper modelMapper;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserAccountController(UserAccountCreator userAccountCreator, ModelMapper modelMapper) {
+    public UserAccountController(UserAccountCreator userAccountCreator, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userAccountCreator = userAccountCreator;
         this.modelMapper = modelMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @PostMapping("public/users")
     public ResponseEntity<?> save(@RequestBody @Valid UserAccountCreationRequest userAccountCreationRequest) {
-        var savedUser = userAccountCreator.create(toUserAccount(userAccountCreationRequest));
-        return new ResponseEntity<>(toUserAccountResponse(savedUser), HttpStatus.CREATED);
+        var userAccount = toUserAccount(userAccountCreationRequest);
+        userAccount.getUserAuth().setPassword(bCryptPasswordEncoder.encode(userAccount.getUserAuth().getPassword()));
+        return new ResponseEntity<>(toUserAccountResponse(userAccountCreator.create(userAccount)), HttpStatus.CREATED);
     }
 
     private UserAccount toUserAccount(UserAccountCreationRequest request) {
