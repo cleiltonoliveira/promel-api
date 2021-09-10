@@ -29,7 +29,8 @@ public class UserAuthEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+//    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_auth_has_role",
             joinColumns = {@JoinColumn(name = "user_auth_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
