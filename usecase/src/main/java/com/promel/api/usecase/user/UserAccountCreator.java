@@ -30,7 +30,7 @@ public class UserAccountCreator {
         verifyIfEmailExists(userAccount.getUserAuth());
 
         var roles = new HashSet<String>();
-        roles.add(RoleType.USER.name());
+        roles.add(RoleType.ASSOCIATION_USER.name());
 
         userAccount.getUserAuth().setRoles(roleFinder.findAllByRoleNames(roles));
         userAccount.setCreationDate(LocalDateTime.now());
