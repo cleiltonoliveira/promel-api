@@ -3,12 +3,13 @@ package com.promel.api.web.security.filters;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -49,11 +50,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             chain.doFilter(req, res);
 
         } catch (ExpiredJwtException e) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.toString());
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The JWT token is expired");
         } catch (MalformedJwtException e) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, e + ". The JWT token is not a valid token");
-        } catch (UsernameNotFoundException e) {
-            res.sendError(HttpServletResponse.SC_NOT_FOUND, e.toString());
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The JWT token is not a valid token");
+        } catch (SignatureException e){
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT signature");
+        } catch (UnsupportedJwtException e){
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The JWT token is unsupported");
         }
     }
 
