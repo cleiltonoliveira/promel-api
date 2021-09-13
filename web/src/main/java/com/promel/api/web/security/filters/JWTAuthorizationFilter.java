@@ -1,9 +1,9 @@
 package com.promel.api.web.security.filters;
 
-import com.promel.api.web.security.SecurityConstants;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,10 +23,12 @@ import static com.promel.api.web.security.SecurityConstants.TOKEN_PREFIX;
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UserDetailsService userDetailsService;
+    private Environment environment;
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsService userDetails) {
+    public JWTAuthorizationFilter(AuthenticationManager authManager, UserDetailsService userDetails, Environment environment) {
         super(authManager);
         this.userDetailsService = userDetails;
+        this.environment = environment;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return null;
         }
 
-        String username = Jwts.parser().setSigningKey(SecurityConstants.SECRET)
+        String username = Jwts.parser().setSigningKey(environment.getProperty("BEARER_TOKEN_SECRET_KEY"))
                 .parseClaimsJws(token.replace(TOKEN_PREFIX, "")).getBody().getSubject();
 
         var userDetails = userDetailsService.loadUserByUsername(username);

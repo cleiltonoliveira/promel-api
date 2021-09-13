@@ -4,6 +4,7 @@ import com.promel.api.usecase.role.RoleType;
 import com.promel.api.web.security.filters.JWTAuthenticationFilter;
 import com.promel.api.web.security.filters.JWTAuthorizationFilter;
 import com.promel.api.web.security.service.UserDetailsServiceImpl;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,9 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService;
+    private Environment environment;
 
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, Environment environment) {
         this.userDetailsService = userDetailsService;
+        this.environment = environment;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/protected/**").hasRole(RoleType.ASSOCIATION_USER.name())
                 .and()
                 .addFilter(getJWTAuthenticationFilter())
-                .addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), userDetailsService, environment))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
@@ -39,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     public JWTAuthenticationFilter getJWTAuthenticationFilter() throws Exception {
-        var jwtAuthenticationFilter = new JWTAuthenticationFilter(authenticationManager());
+        var jwtAuthenticationFilter = new JWTAuthenticationFilter(authenticationManager(), environment);
         jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/users/login");
 
         return jwtAuthenticationFilter;

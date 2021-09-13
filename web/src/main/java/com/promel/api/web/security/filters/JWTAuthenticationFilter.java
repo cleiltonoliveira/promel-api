@@ -5,6 +5,7 @@ import com.promel.api.domain.model.UserAuth;
 import com.promel.api.web.security.SecurityConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,9 +22,11 @@ import java.util.HashMap;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
+    private Environment environment;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, Environment environment) {
         this.authenticationManager = authenticationManager;
+        this.environment = environment;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String token = Jwts.builder().setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS512, SecurityConstants.SECRET).compact();
+                .signWith(SignatureAlgorithm.HS512, environment.getProperty("BEARER_TOKEN_SECRET_KEY")).compact();
 
         String bearerToken = SecurityConstants.TOKEN_PREFIX + token;
 
