@@ -1,4 +1,4 @@
-package com.promel.api.config;
+package com.promel.api.web.security.cryptography;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
