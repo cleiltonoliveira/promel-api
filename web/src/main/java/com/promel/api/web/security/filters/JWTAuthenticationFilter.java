@@ -53,13 +53,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal()).getUsername();
 
         String token = Jwts.builder().setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.TOKEN_EXPIRATION_IN_MILLIS))
                 .signWith(SignatureAlgorithm.HS512, environment.getProperty("BEARER_TOKEN_SECRET_KEY")).compact();
 
-        String bearerToken = SecurityConstants.TOKEN_PREFIX + token;
+        String bearerToken = SecurityConstants.BEARER_TOKEN_PREFIX + token;
 
         response.setContentType("application/json");
-        response.addHeader(SecurityConstants.HEADER_STRING, bearerToken);
+        response.addHeader(SecurityConstants.AUTHORIZATION_HEADER, bearerToken);
 
         var body = new HashMap<String, String>();
         body.put("token", bearerToken);

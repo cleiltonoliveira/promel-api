@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.promel.api.web.security.SecurityConstants.HEADER_STRING;
-import static com.promel.api.web.security.SecurityConstants.TOKEN_PREFIX;
+import static com.promel.api.web.security.SecurityConstants.AUTHORIZATION_HEADER;
+import static com.promel.api.web.security.SecurityConstants.BEARER_TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -35,9 +35,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader(HEADER_STRING);
+        String header = req.getHeader(AUTHORIZATION_HEADER);
 
-        if (header == null || !header.startsWith(TOKEN_PREFIX)) {
+        if (header == null || !header.startsWith(BEARER_TOKEN_PREFIX)) {
             chain.doFilter(req, res);
             return;
         }
@@ -58,14 +58,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthenticationToken(HttpServletRequest request) {
-        String token = request.getHeader(HEADER_STRING);
+        String token = request.getHeader(AUTHORIZATION_HEADER);
 
         if (token == null) {
             return null;
         }
 
         String username = Jwts.parser().setSigningKey(environment.getProperty("BEARER_TOKEN_SECRET_KEY"))
-                .parseClaimsJws(token.replace(TOKEN_PREFIX, "")).getBody().getSubject();
+                .parseClaimsJws(token.replace(BEARER_TOKEN_PREFIX, "")).getBody().getSubject();
 
         var userDetails = userDetailsService.loadUserByUsername(username);
 
