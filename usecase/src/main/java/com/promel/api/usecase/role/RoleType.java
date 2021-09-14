@@ -1,6 +1,6 @@
 package com.promel.api.usecase.role;
 
 public enum RoleType {
-    ADMIN,
-    USER
+    ASSOCIATION_ADMIN,
+    ASSOCIATION_USER
 }
