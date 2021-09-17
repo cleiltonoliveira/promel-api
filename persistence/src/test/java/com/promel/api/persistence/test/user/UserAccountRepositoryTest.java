@@ -1,16 +1,13 @@
 package com.promel.api.persistence.test.user;
 
 import com.promel.api.persistence.authentication.UserAuthEntity;
+import com.promel.api.persistence.test.SetupRepositoryTest;
 import com.promel.api.persistence.user.UserAccountEntity;
 import com.promel.api.persistence.user.UserAccountRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,14 +17,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-@TestPropertySource(properties = {
-        "spring.flyway.enabled=false",
-        "spring.jpa.hibernate.ddl-auto=create-drop"
-})
 @ContextConfiguration(classes = {UserAccountRepository.class})
-@EnableJpaRepositories(basePackages = {"com.promel.api.persistence.*"})
-@EntityScan("com.promel.api.persistence.*")
+@SetupRepositoryTest
 public class UserAccountRepositoryTest {
 
     @Autowired
@@ -76,7 +67,6 @@ public class UserAccountRepositoryTest {
         repository.delete(entity);
         Assertions.assertEquals(Optional.empty(), repository.findById(entity.getId()));
     }
-
 
     @Test
     public void UpdateShouldChangeAndPersistData() {

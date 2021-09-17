@@ -2,15 +2,11 @@ package com.promel.api.persistence.test.role;
 
 import com.promel.api.persistence.role.RoleEntity;
 import com.promel.api.persistence.role.RoleRepository;
+import com.promel.api.persistence.test.SetupRepositoryTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,15 +15,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@DataJpaTest
-@TestPropertySource(properties = {
-        "spring.flyway.enabled=false",
-        "spring.jpa.hibernate.ddl-auto=create-drop"
-})
 @ContextConfiguration(classes = {RoleRepository.class})
-@EnableJpaRepositories(basePackages = {"com.promel.api.persistence.*"})
-@EntityScan("com.promel.api.persistence.*")
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@SetupRepositoryTest
 public class RoleRepositoryTest {
 
     @Autowired
