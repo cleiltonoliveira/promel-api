@@ -1,7 +1,9 @@
 package com.promel.api.persistence.authentication;
 
 import com.promel.api.persistence.role.RoleEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -14,6 +16,8 @@ import java.util.List;
 @Table(name = "user_auth")
 @Embeddable
 @DynamicInsert
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserAuthEntity {
 
     @Id
