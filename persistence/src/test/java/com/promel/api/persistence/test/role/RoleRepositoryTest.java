@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -49,11 +48,11 @@ public class RoleRepositoryTest {
 
     @Test
     public void findAllByNamesShouldReturnFoundRoles() {
-        assertEquals(2, repository.findAllByRoleIn(new HashSet<>(List.of("ASSOCIATION_ADMIN", "ASSOCIATION_USER"))).size());
+        assertEquals(2, repository.findAllByRoleIn(Set.of("ASSOCIATION_ADMIN", "ASSOCIATION_USER")).size());
     }
 
     @Test
     public void findAllByNamesWhenNoMatchShouldReturnEmptyList() {
-        assertEquals(0, repository.findAllByRoleIn(new HashSet<>(List.of("ROLE1", "ROLE2"))).size());
+        assertEquals(0, repository.findAllByRoleIn(Set.of("ROLE1", "ROLE2")).size());
     }
 }
