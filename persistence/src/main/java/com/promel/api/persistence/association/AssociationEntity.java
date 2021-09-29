@@ -1,6 +1,7 @@
 package com.promel.api.persistence.association;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -22,6 +23,7 @@ public class AssociationEntity {
 
     @NotBlank
     @Column(name = "cnpj")
+    @CNPJ
     private String cnpj;
 
     @Column(name = "invite_code")
