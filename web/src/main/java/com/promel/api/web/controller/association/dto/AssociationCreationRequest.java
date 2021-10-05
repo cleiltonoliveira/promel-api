@@ -18,6 +18,4 @@ public class AssociationCreationRequest {
     @CNPJ
     private String cnpj;
 
-    @NotNull
-    private Long ownId;
 }
