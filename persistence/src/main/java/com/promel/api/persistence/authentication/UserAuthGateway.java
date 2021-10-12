@@ -1,10 +1,13 @@
 package com.promel.api.persistence.authentication;
 
-import com.promel.api.usecase.authentication.adapter.UserAuthAdapter;
+import com.promel.api.domain.model.Role;
 import com.promel.api.domain.model.UserAuth;
+import com.promel.api.usecase.authentication.adapter.UserAuthAdapter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -19,6 +22,11 @@ public class UserAuthGateway implements UserAuthAdapter {
     }
 
     @Override
+    public UserAuth save(UserAuth userAuth) {
+        return toDomain(repository.save(toEntity(userAuth)));
+    }
+
+    @Override
     public boolean existsByEmail(String email) {
         return repository.existsByEmail(email);
     }
@@ -28,7 +36,19 @@ public class UserAuthGateway implements UserAuthAdapter {
         return repository.findByEmail(email).map(this::toDomain);
     }
 
+    private UserAuthEntity toEntity(UserAuth userAuth) {
+        return modelMapper.map(userAuth, UserAuthEntity.class);
+    }
+
     private UserAuth toDomain(UserAuthEntity entity) {
-        return modelMapper.map(entity, UserAuth.class);
+
+        modelMapper.typeMap(UserAuthEntity.class, UserAuth.class)
+                .addMappings(mapper -> mapper.skip(UserAuth::setRoles));
+
+        var userAuth = modelMapper.map(entity, UserAuth.class);
+
+        userAuth.setRoles(modelMapper.map(entity.getRoles(), new TypeToken<List<Role>>() {}.getType()));
+
+        return userAuth;
     }
 }
