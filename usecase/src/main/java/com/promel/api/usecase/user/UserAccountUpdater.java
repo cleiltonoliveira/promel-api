@@ -5,6 +5,7 @@ import com.promel.api.usecase.association.AssociationFinder;
 import com.promel.api.usecase.authentication.UserAuthUpdater;
 import com.promel.api.usecase.role.RoleType;
 import com.promel.api.usecase.user.adapter.UserAccountAdapter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -29,6 +30,7 @@ public class UserAccountUpdater {
         this.userAuthUpdater = userAuthUpdater;
     }
 
+    @Transactional
     public UserAccount linkUserToAssociation(Long associationId, String userEmail) {
         var userAuth = userAuthUpdater.updateRoles(userEmail, Set.of(RoleType.ASSOCIATION_ADMIN.name(), RoleType.ASSOCIATION_USER.name()));
         var userAccount = userAccountFinder.findByUserAuth(userAuth);
