@@ -13,4 +13,6 @@ public interface AssociationAdapter {
     boolean existsByCnpj(String cnpj);
 
     boolean existsById(Long id);
+
+    boolean existsByInviteCode(String inviteCode);
 }

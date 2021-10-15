@@ -23,4 +23,8 @@ public class AssociationFinder {
     public boolean associationExistsById(Long id) {
         return adapter.existsById(id);
     }
+
+    public boolean associationExistsByInviteCode(String inviteCode){
+        return adapter.existsByInviteCode(inviteCode);
+    }
 }

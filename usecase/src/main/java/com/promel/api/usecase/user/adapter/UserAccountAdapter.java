@@ -18,5 +18,7 @@ public interface UserAccountAdapter {
 
     Optional<UserAccount>  findByUserAuth(UserAuth userAuth);
 
+    Optional<UserAccount>  findByEmail(String email);
+
     boolean existsById(Long id);
 }

@@ -1,5 +1,6 @@
 package com.promel.api.web.exception.handler;
 
+import com.promel.api.usecase.exception.CustomForbiddenException;
 import com.promel.api.usecase.exception.ResourceConflictException;
 import com.promel.api.usecase.exception.ResourceNotFoundException;
 import com.promel.api.web.exception.ErrorDetailsResponse;
@@ -37,6 +38,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var errorDetails = buildErrorDetails(
                 "Resource conflict",
                 HttpStatus.CONFLICT.value(),
+                exception.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.valueOf(errorDetails.getHttpStatusCode()));
+    }
+
+    @ExceptionHandler(CustomForbiddenException.class)
+    public ResponseEntity<?> handleCustomForbiddenException(CustomForbiddenException exception, WebRequest request) {
+        var errorDetails = buildErrorDetails(
+                "Forbidden",
+                HttpStatus.FORBIDDEN.value(),
                 exception.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(errorDetails, HttpStatus.valueOf(errorDetails.getHttpStatusCode()));

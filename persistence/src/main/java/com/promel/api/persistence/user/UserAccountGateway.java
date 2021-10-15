@@ -54,6 +54,11 @@ public class UserAccountGateway implements UserAccountAdapter {
         return repository.findByUserAuth(modelMapper.map(userAuth, UserAuthEntity.class)).map(this::toDomain);
     }
 
+    @Override
+    public Optional<UserAccount> findByEmail(String email){
+        return repository.findByUserAuthEmail(email).map(this::toDomain);
+    }
+
     private UserAccount toDomain(UserAccountEntity entity) {
         var user = modelMapper.map(entity, UserAccount.class);
         user.getUserAuth().setRoles(modelMapper.map(entity.getUserAuth().getRoles(), new TypeToken<List<Role>>() {}.getType()));
