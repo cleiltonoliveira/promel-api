@@ -31,4 +31,9 @@ public class UserAccountFinder {
         return userAccountAdapter.findByUserAuth(userAuth)
                 .orElseThrow(() -> new ResourceNotFoundException("No users found with the given authentication"));
     }
+
+    public UserAccount findByEmail(String email) {
+        return userAccountAdapter.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("No users found with the given email"));
+    }
 }

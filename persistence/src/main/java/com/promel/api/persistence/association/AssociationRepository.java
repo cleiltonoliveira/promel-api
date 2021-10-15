@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AssociationRepository extends JpaRepository<AssociationEntity, Long> {
 
-     boolean existsByCnpj(String cnpj);
+    boolean existsByCnpj(String cnpj);
+
+    boolean existsByInviteCode(String inviteCode);
 }
