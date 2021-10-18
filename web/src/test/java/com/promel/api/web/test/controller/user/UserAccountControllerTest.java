@@ -1,6 +1,5 @@
 package com.promel.api.web.test.controller.user;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.promel.api.domain.model.Association;
 import com.promel.api.domain.model.UserAccount;
 import com.promel.api.domain.model.UserAuth;
@@ -18,6 +17,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.promel.api.web.test.controller.helper.JsonHelper.asJsonString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
@@ -135,13 +135,5 @@ public class UserAccountControllerTest extends MySQLTestContainerConfig {
         mockMvc.perform(patch("/api/v1/protected/users/association").param("inviteCode", "wrongInviteCode")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
-    }
-
-    private String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

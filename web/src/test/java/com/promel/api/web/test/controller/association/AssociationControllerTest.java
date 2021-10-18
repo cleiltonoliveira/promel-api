@@ -1,6 +1,5 @@
 package com.promel.api.web.test.controller.association;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.promel.api.domain.model.UserAccount;
 import com.promel.api.domain.model.UserAuth;
@@ -19,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.promel.api.web.test.controller.helper.JsonHelper.asJsonString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
@@ -215,13 +215,5 @@ public class AssociationControllerTest extends MySQLTestContainerConfig {
         model.setName("ADRAP");
         model.setCnpj("02.616.289/0001-01");
         return model;
-    }
-
-    private String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }
