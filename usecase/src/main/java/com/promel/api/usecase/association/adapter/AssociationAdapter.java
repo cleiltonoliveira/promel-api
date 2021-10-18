@@ -15,4 +15,6 @@ public interface AssociationAdapter {
     boolean existsById(Long id);
 
     boolean existsByInviteCode(String inviteCode);
+
+    Optional<Association> findByInviteCode(String inviteCode);
 }

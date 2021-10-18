@@ -42,6 +42,11 @@ public class AssociationGateway implements AssociationAdapter {
         return repository.existsByInviteCode(inviteCode);
     }
 
+    @Override
+    public Optional<Association> findByInviteCode(String inviteCode) {
+        return repository.findByInviteCode(inviteCode).map(this::toDomain);
+    }
+
     private Association toDomain(AssociationEntity entity) {
         return modelMapper.map(entity, Association.class);
     }

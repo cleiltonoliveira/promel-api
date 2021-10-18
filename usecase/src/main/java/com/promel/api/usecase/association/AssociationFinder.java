@@ -27,4 +27,8 @@ public class AssociationFinder {
     public boolean associationExistsByInviteCode(String inviteCode){
         return adapter.existsByInviteCode(inviteCode);
     }
+
+    public Association findByInviteCode(String inviteCode) {
+        return adapter.findByInviteCode(inviteCode).orElseThrow(() -> new ResourceNotFoundException("No associations found with the invite code provided"));
+    }
 }
