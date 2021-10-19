@@ -78,6 +78,19 @@ public class AssociationRepositoryTest {
     }
 
     @Test
+    public void findByInviteCodeShouldReturnEntity() {
+        var association = buildEntity();
+        association.setInviteCode("testInviteCode");
+        repository.save(association);
+        assertNotNull(repository.findByInviteCode(association.getInviteCode()).orElse(null));
+    }
+
+    @Test
+    public void findByInviteCodeWhenNoMatchShouldReturnEmpty() {
+        assertEquals(Optional.empty(), repository.findByInviteCode("testInviteCode"));
+    }
+
+    @Test
     public void existsByCnpjShouldReturnTrue() {
         repository.save(buildEntity());
         assertTrue(repository.existsByCnpj("02.616.289/0001-01"));

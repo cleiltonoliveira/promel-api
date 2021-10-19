@@ -3,6 +3,7 @@ package com.promel.api.usecase.user;
 import com.promel.api.domain.model.UserAccount;
 import com.promel.api.usecase.association.AssociationFinder;
 import com.promel.api.usecase.authentication.UserAuthUpdater;
+import com.promel.api.usecase.exception.ResourceConflictException;
 import com.promel.api.usecase.role.RoleType;
 import com.promel.api.usecase.user.adapter.UserAccountAdapter;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,19 @@ public class UserAccountUpdater {
 
         userAccount.setAssociation(association);
 
+        return userAccountAdapter.save(userAccount);
+    }
+
+    @Transactional
+    public UserAccount joinAssociation(String inviteCode, String userEmail) {
+        var userAccount = userAccountFinder.findByEmail(userEmail);
+        var association = associationFinder.findByInviteCode(inviteCode);
+
+        if (userAccount.getAssociation() != null) {
+            throw new ResourceConflictException("The user has already joined an association");
+        }
+
+        userAccount.setAssociation(association);
         return userAccountAdapter.save(userAccount);
     }
 }
