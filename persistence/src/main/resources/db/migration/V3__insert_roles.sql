@@ -1,2 +1,2 @@
-INSERT INTO `promel`.`role` (`role`) VALUES ('ASSOCIATION_ADMIN');
-INSERT INTO `promel`.`role` (`role`) VALUES ('ASSOCIATION_USER');
+INSERT INTO `role` (`role`) VALUES ('ASSOCIATION_ADMIN');
+INSERT INTO `role` (`role`) VALUES ('ASSOCIATION_USER');
