@@ -1,5 +1,6 @@
 package com.promel.api.web.security.filters;
 
+import com.promel.api.usecase.exception.ResourceNotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -57,6 +58,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid JWT signature");
         } catch (UnsupportedJwtException e){
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "The JWT token is unsupported");
+        } catch (ResourceNotFoundException e) {
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
         }
     }
 
