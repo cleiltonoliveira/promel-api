@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class UserAccountResponse {
@@ -12,4 +13,6 @@ public class UserAccountResponse {
     private String phone;
     @JsonProperty("email")
     private String userAuthEmail;
+    private Long associationId;
+    private List<String> roles;
 }
