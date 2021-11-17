@@ -5,6 +5,7 @@ import com.promel.api.usecase.association.adapter.AssociationAdapter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -45,6 +46,11 @@ public class AssociationGateway implements AssociationAdapter {
     @Override
     public Optional<Association> findByInviteCode(String inviteCode) {
         return repository.findByInviteCode(inviteCode).map(this::toDomain);
+    }
+
+    @Override
+    public List<String> findAssociationMembers(Long associationId) {
+        return repository.findAssociationMembers(associationId);
     }
 
     private Association toDomain(AssociationEntity entity) {
