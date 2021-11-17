@@ -2,6 +2,7 @@ package com.promel.api.usecase.association.adapter;
 
 import com.promel.api.domain.model.Association;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AssociationAdapter {
@@ -17,4 +18,6 @@ public interface AssociationAdapter {
     boolean existsByInviteCode(String inviteCode);
 
     Optional<Association> findByInviteCode(String inviteCode);
+
+    List<String> findAssociationMembers(Long associationId);
 }
