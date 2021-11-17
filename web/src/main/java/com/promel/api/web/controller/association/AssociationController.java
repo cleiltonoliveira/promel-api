@@ -2,6 +2,7 @@ package com.promel.api.web.controller.association;
 
 import com.promel.api.domain.model.Association;
 import com.promel.api.usecase.association.AssociationCreator;
+import com.promel.api.usecase.association.AssociationFinder;
 import com.promel.api.usecase.association.AssociationUpdater;
 import com.promel.api.usecase.user.UserAccountUpdater;
 import com.promel.api.web.controller.association.dto.AssociationCreationRequest;
@@ -25,6 +26,7 @@ public class AssociationController {
     private ModelMapper modelMapper;
     private UserAccountUpdater userAccountUpdater;
     private AssociationUpdater associationUpdater;
+    private AssociationFinder associationFinder;
 
     @PostMapping("protected/associations")
     public ResponseEntity<?> createAssociation(@RequestBody @Valid AssociationCreationRequest associationCreationRequest, Principal principal) {
@@ -37,6 +39,11 @@ public class AssociationController {
     public ResponseEntity<?> updateInviteCode(@Valid @RequestBody InviteCodeUpdateRequest request, @PathVariable(name = "id") Long id, Principal principal) {
         associationUpdater.updateInviteCode(request.getInviteCode(), id, principal.getName());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("protected/associations/{id}")
+    public ResponseEntity<?> findAccount(@PathVariable Long id) {
+        return new ResponseEntity<>(toAssociationResponse(associationFinder.findById(id)), HttpStatus.OK);
     }
 
     private void linkManagerUserToAssociation(Long associationId, String userEmail) {
