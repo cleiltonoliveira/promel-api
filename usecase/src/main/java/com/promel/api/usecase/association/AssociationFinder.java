@@ -6,6 +6,7 @@ import com.promel.api.usecase.exception.ResourceNotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 @Named
 public class AssociationFinder {
@@ -20,11 +21,15 @@ public class AssociationFinder {
         return adapter.findById(id).orElseThrow(() -> new ResourceNotFoundException("No associations found with the ID provided"));
     }
 
+    public List<String> findAssociationMembers(Long associationId) {
+        return adapter.findAssociationMembers(associationId);
+    }
+
     public boolean associationExistsById(Long id) {
         return adapter.existsById(id);
     }
 
-    public boolean associationExistsByInviteCode(String inviteCode){
+    public boolean associationExistsByInviteCode(String inviteCode) {
         return adapter.existsByInviteCode(inviteCode);
     }
 

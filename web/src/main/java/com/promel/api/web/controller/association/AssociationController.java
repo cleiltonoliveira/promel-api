@@ -46,6 +46,11 @@ public class AssociationController {
         return new ResponseEntity<>(toAssociationResponse(associationFinder.findById(id)), HttpStatus.OK);
     }
 
+    @GetMapping("protected/associations/{id}/members")
+    public ResponseEntity<?> findAssociationMembers(@PathVariable Long id) {
+        return new ResponseEntity<>(associationFinder.findAssociationMembers(id), HttpStatus.OK);
+    }
+
     private void linkManagerUserToAssociation(Long associationId, String userEmail) {
         userAccountUpdater.linkUserToAssociation(associationId, userEmail);
     }
