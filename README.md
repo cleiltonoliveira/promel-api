@@ -18,7 +18,7 @@ O projeto está dividido nos seguintes módulos:
 
 ### Diagrama de dependências entre os módulos
 
-<img src="assets/diagram-arch.png" alt="Architecture" width="300" height="300"/>
+<img src="assets/diagram-arch.png" alt="Architecture" width="500" height="500"/>
 
 ### Security
 A implementação atual do projeto utiliza o Spring Security juntamente com uma implementação de autenticação usando JWT.
