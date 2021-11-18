@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @AllArgsConstructor
 public class HiveGateway implements HiveAdapter {
@@ -21,6 +24,11 @@ public class HiveGateway implements HiveAdapter {
     @Override
     public boolean existsByIdentificationCodeAndProductionUnitId(String idCode, Long unitId) {
         return repository.existsByIdentificationCodeAndProductionUnitId(idCode, unitId);
+    }
+
+    @Override
+    public List<Hive> findAllHivesByUserId(Long userId) {
+        return repository.findAllHivesByUserId(userId).stream().map(this::toDomain).collect(Collectors.toList());
     }
 
     private Hive toDomain(HiveEntity entity) {
