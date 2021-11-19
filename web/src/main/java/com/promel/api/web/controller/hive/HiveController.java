@@ -3,6 +3,7 @@ package com.promel.api.web.controller.hive;
 import com.promel.api.domain.model.Hive;
 import com.promel.api.usecase.hive.HiveCreator;
 import com.promel.api.usecase.hive.HiveFinder;
+import com.promel.api.usecase.user.UserAccountFinder;
 import com.promel.api.web.controller.hive.dto.HiveCreationRequest;
 import com.promel.api.web.controller.hive.dto.HiveResponse;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import java.security.Principal;
 public class HiveController {
     private HiveCreator hiveCreator;
     private HiveFinder hiveFinder;
+    private UserAccountFinder userAccountFinder;
     private ModelMapper modelMapper;
 
     @PostMapping("protected/hives")
@@ -30,8 +32,9 @@ public class HiveController {
     }
 
     @GetMapping("protected/hives")
-    public ResponseEntity<?> findAllHivesByUserId (Long userId) {
-        var hives = hiveFinder.findAllHiveByUserId(userId);
+    public ResponseEntity<?> findAllHivesByUserId (Principal principal) {
+        var user = userAccountFinder.findByEmail(principal.getName());
+        var hives = hiveFinder.findAllHiveByUserId(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(hives.stream().map(this::toHiveResponse));
     }
 
