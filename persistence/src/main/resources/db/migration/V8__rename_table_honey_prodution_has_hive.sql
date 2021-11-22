@@ -1,0 +1,1 @@
+ALTER TABLE `honey_production_has_hive` RENAME TO  `hive_producton_per_harvest` ;
