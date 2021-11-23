@@ -1,0 +1,1 @@
+DROP TABLE `production_unit_has_honey_production`;
