@@ -9,4 +9,5 @@ public class ProductionUnitResponse {
     private Long id;
     private Double totalProduction;
     private LocalDateTime lastModificationDate;
+    private Long userAccountId;
 }

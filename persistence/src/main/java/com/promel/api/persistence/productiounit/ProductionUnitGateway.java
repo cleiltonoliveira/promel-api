@@ -25,6 +25,11 @@ public class ProductionUnitGateway implements ProductionUnitAdapter {
         return toDomain(repository.save(toEntity(productionUnit)));
     }
 
+    @Override
+    public Optional<ProductionUnit> findFirstByUserId(Long id) {
+        return repository.findFirstByUserAccountId(id).map(this::toDomain);
+    }
+
     private ProductionUnit toDomain(ProductionUnitEntity entity) {
         return modelMapper.map(entity, ProductionUnit.class);
     }
