@@ -9,4 +9,6 @@ public interface ProductionUnitAdapter {
     Optional<ProductionUnit> findById(Long id);
 
     ProductionUnit save(ProductionUnit model);
+
+    Optional<ProductionUnit> findFirstByUserId(Long id);
 }
