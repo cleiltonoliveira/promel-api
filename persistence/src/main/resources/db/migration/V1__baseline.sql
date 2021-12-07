@@ -8,19 +8,9 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema promel
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema promel
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `promel` ;
-USE `promel` ;
-
--- -----------------------------------------------------
 -- Table `promel`.`association`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`association` (
+CREATE TABLE IF NOT EXISTS `association` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `cnpj` VARCHAR(45) NOT NULL,
@@ -29,13 +19,13 @@ CREATE TABLE IF NOT EXISTS `promel`.`association` (
     PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `cnpj_UNIQUE` ON `promel`.`association` (`cnpj` ASC) VISIBLE;
+CREATE UNIQUE INDEX `cnpj_UNIQUE` ON `association` (`cnpj` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`role` (
+CREATE TABLE IF NOT EXISTS `role` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `role` VARCHAR(45) NOT NULL,
     `details` VARCHAR(255) NULL,
@@ -46,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `promel`.`role` (
 -- -----------------------------------------------------
 -- Table `promel`.`user_auth`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`user_auth` (
+CREATE TABLE IF NOT EXISTS `user_auth` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `password` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL,
@@ -54,18 +44,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`user_auth` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_user_auth_role1`
     FOREIGN KEY (`role_id`)
-    REFERENCES `promel`.`role` (`id`)
+    REFERENCES `role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_user_auth_role1_idx` ON `promel`.`user_auth` (`role_id` ASC) VISIBLE;
+CREATE INDEX `fk_user_auth_role1_idx` ON `user_auth` (`role_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`user_account`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`user_account` (
+CREATE TABLE IF NOT EXISTS `user_account` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `creation_date` DATETIME NOT NULL,
@@ -75,25 +65,25 @@ CREATE TABLE IF NOT EXISTS `promel`.`user_account` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_user_account_association1`
     FOREIGN KEY (`association_id`)
-    REFERENCES `promel`.`association` (`id`)
+    REFERENCES `association` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_user_account_user_auth1`
     FOREIGN KEY (`user_auth_id`)
-    REFERENCES `promel`.`user_auth` (`id`)
+    REFERENCES `user_auth` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_user_account_association1_idx` ON `promel`.`user_account` (`association_id` ASC) VISIBLE;
+CREATE INDEX `fk_user_account_association1_idx` ON `user_account` (`association_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_user_account_user_auth1_idx` ON `promel`.`user_account` (`user_auth_id` ASC) VISIBLE;
+CREATE INDEX `fk_user_account_user_auth1_idx` ON `user_account` (`user_auth_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`production_unit`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`production_unit` (
+CREATE TABLE IF NOT EXISTS `production_unit` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `total_production` DECIMAL(12,4) NOT NULL,
     `last_modification_date` DATETIME NOT NULL,
@@ -101,18 +91,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`production_unit` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_production_unit_user_account1`
     FOREIGN KEY (`user_account_id`)
-    REFERENCES `promel`.`user_account` (`id`)
+    REFERENCES `user_account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_production_unit_user_account1_idx` ON `promel`.`production_unit` (`user_account_id` ASC) VISIBLE;
+CREATE INDEX `fk_production_unit_user_account1_idx` ON `production_unit` (`user_account_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`hive`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`hive` (
+CREATE TABLE IF NOT EXISTS `hive` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `identification_code` VARCHAR(45) NOT NULL,
     `description` VARCHAR(255) NULL,
@@ -121,18 +111,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`hive` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_hive_production_unit1`
     FOREIGN KEY (`production_unit_id`)
-    REFERENCES `promel`.`production_unit` (`id`)
+    REFERENCES `production_unit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_hive_production_unit1_idx` ON `promel`.`hive` (`production_unit_id` ASC) VISIBLE;
+CREATE INDEX `fk_hive_production_unit1_idx` ON `hive` (`production_unit_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`variables`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`variables` (
+CREATE TABLE IF NOT EXISTS `variables` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `weight` DECIMAL(4,2) NULL,
     `umidity` DECIMAL(5,2) NULL,
@@ -142,18 +132,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`variables` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_variables_hive1`
     FOREIGN KEY (`hive_id`)
-    REFERENCES `promel`.`hive` (`id`)
+    REFERENCES `hive` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_variables_hive1_idx` ON `promel`.`variables` (`hive_id` ASC) VISIBLE;
+CREATE INDEX `fk_variables_hive1_idx` ON `variables` (`hive_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`production_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`production_status` (
+CREATE TABLE IF NOT EXISTS `production_status` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(45) NOT NULL,
     `details` VARCHAR(255) NULL,
@@ -164,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `promel`.`production_status` (
 -- -----------------------------------------------------
 -- Table `promel`.`honey_production`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`honey_production` (
+CREATE TABLE IF NOT EXISTS `honey_production` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `harvest_date` DATETIME NOT NULL,
     `association_id` INT NOT NULL,
@@ -174,25 +164,25 @@ CREATE TABLE IF NOT EXISTS `promel`.`honey_production` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_harvest_association1`
     FOREIGN KEY (`association_id`)
-    REFERENCES `promel`.`association` (`id`)
+    REFERENCES `association` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_harvest_production_status1`
     FOREIGN KEY (`production_status_id`)
-    REFERENCES `promel`.`production_status` (`id`)
+    REFERENCES `production_status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_harvest_association1_idx` ON `promel`.`honey_production` (`association_id` ASC) VISIBLE;
+CREATE INDEX `fk_harvest_association1_idx` ON `honey_production` (`association_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_harvest_production_status1_idx` ON `promel`.`honey_production` (`production_status_id` ASC) VISIBLE;
+CREATE INDEX `fk_harvest_production_status1_idx` ON `honey_production` (`production_status_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`product` (
+CREATE TABLE IF NOT EXISTS `product` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `description` VARCHAR(255) NULL,
     `name` VARCHAR(255) NOT NULL,
@@ -204,24 +194,24 @@ CREATE TABLE IF NOT EXISTS `promel`.`product` (
 -- -----------------------------------------------------
 -- Table `promel`.`stock`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`stock` (
+CREATE TABLE IF NOT EXISTS `stock` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `association_id` INT NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_stock_association1`
     FOREIGN KEY (`association_id`)
-    REFERENCES `promel`.`association` (`id`)
+    REFERENCES `association` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_stock_association1_idx` ON `promel`.`stock` (`association_id` ASC) VISIBLE;
+CREATE INDEX `fk_stock_association1_idx` ON `stock` (`association_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`unity_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`unity_type` (
+CREATE TABLE IF NOT EXISTS `unity_type` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `type` VARCHAR(255) NOT NULL,
     `description` VARCHAR(255) NULL,
@@ -232,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `promel`.`unity_type` (
 -- -----------------------------------------------------
 -- Table `promel`.`product_stock`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`product_stock` (
+CREATE TABLE IF NOT EXISTS `product_stock` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `quantity` INT NOT NULL,
     `price_per_unity` DECIMAL(9,4) NOT NULL,
@@ -244,32 +234,32 @@ CREATE TABLE IF NOT EXISTS `promel`.`product_stock` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_product_stock_unity_type1`
     FOREIGN KEY (`unity_type_id`)
-    REFERENCES `promel`.`unity_type` (`id`)
+    REFERENCES `unity_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_product_stock_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `promel`.`product` (`id`)
+    REFERENCES `product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_product_stock_stock1`
     FOREIGN KEY (`stock_id`)
-    REFERENCES `promel`.`stock` (`id`)
+    REFERENCES `stock` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_product_stock_unity_type1_idx` ON `promel`.`product_stock` (`unity_type_id` ASC) VISIBLE;
+CREATE INDEX `fk_product_stock_unity_type1_idx` ON `product_stock` (`unity_type_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_product_stock_product1_idx` ON `promel`.`product_stock` (`product_id` ASC) VISIBLE;
+CREATE INDEX `fk_product_stock_product1_idx` ON `product_stock` (`product_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_product_stock_stock1_idx` ON `promel`.`product_stock` (`stock_id` ASC) VISIBLE;
+CREATE INDEX `fk_product_stock_stock1_idx` ON `product_stock` (`stock_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`sale`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`sale` (
+CREATE TABLE IF NOT EXISTS `sale` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `creation_date` DATETIME NOT NULL,
     `description` VARCHAR(255) NULL,
@@ -279,18 +269,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`sale` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_sale_product_stock1`
     FOREIGN KEY (`product_stock_id`)
-    REFERENCES `promel`.`product_stock` (`id`)
+    REFERENCES `product_stock` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_sale_product_stock1_idx` ON `promel`.`sale` (`product_stock_id` ASC) VISIBLE;
+CREATE INDEX `fk_sale_product_stock1_idx` ON `sale` (`product_stock_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`user_product_request`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`user_product_request` (
+CREATE TABLE IF NOT EXISTS `user_product_request` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `request_date` DATETIME NOT NULL,
     `details` VARCHAR(255) NULL,
@@ -298,18 +288,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`user_product_request` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_user_product_request_user_account1`
     FOREIGN KEY (`user_account_id`)
-    REFERENCES `promel`.`user_account` (`id`)
+    REFERENCES `user_account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_user_product_request_user_account1_idx` ON `promel`.`user_product_request` (`user_account_id` ASC) VISIBLE;
+CREATE INDEX `fk_user_product_request_user_account1_idx` ON `user_product_request` (`user_account_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`alert_event`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`alert_event` (
+CREATE TABLE IF NOT EXISTS `alert_event` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(45) NOT NULL,
     `creation_date` DATETIME NOT NULL,
@@ -318,36 +308,36 @@ CREATE TABLE IF NOT EXISTS `promel`.`alert_event` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_alert_event_user_account1`
     FOREIGN KEY (`user_account_id`)
-    REFERENCES `promel`.`user_account` (`id`)
+    REFERENCES `user_account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_alert_event_user_account1_idx` ON `promel`.`alert_event` (`user_account_id` ASC) VISIBLE;
+CREATE INDEX `fk_alert_event_user_account1_idx` ON `alert_event` (`user_account_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`money_amount`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`money_amount` (
+CREATE TABLE IF NOT EXISTS `money_amount` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `amount` DECIMAL(12,4) NOT NULL,
     `association_id` INT NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_money_amount_association1`
     FOREIGN KEY (`association_id`)
-    REFERENCES `promel`.`association` (`id`)
+    REFERENCES `association` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_money_amount_association1_idx` ON `promel`.`money_amount` (`association_id` ASC) VISIBLE;
+CREATE INDEX `fk_money_amount_association1_idx` ON `money_amount` (`association_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`expense`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`expense` (
+CREATE TABLE IF NOT EXISTS `expense` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `cost` DECIMAL(10,4) NOT NULL,
     `description` VARCHAR(255) NULL,
@@ -356,18 +346,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`expense` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_expense_association1`
     FOREIGN KEY (`association_id`)
-    REFERENCES `promel`.`association` (`id`)
+    REFERENCES `association` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_expense_association1_idx` ON `promel`.`expense` (`association_id` ASC) VISIBLE;
+CREATE INDEX `fk_expense_association1_idx` ON `expense` (`association_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`money_operation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`money_operation` (
+CREATE TABLE IF NOT EXISTS `money_operation` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `operation_date` DATETIME NOT NULL,
     `details` VARCHAR(255) NULL,
@@ -377,18 +367,18 @@ CREATE TABLE IF NOT EXISTS `promel`.`money_operation` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_money_operation_association1`
     FOREIGN KEY (`association_id`)
-    REFERENCES `promel`.`association` (`id`)
+    REFERENCES `association` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_money_operation_association1_idx` ON `promel`.`money_operation` (`association_id` ASC) VISIBLE;
+CREATE INDEX `fk_money_operation_association1_idx` ON `money_operation` (`association_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`product_request`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`product_request` (
+CREATE TABLE IF NOT EXISTS `product_request` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `item_quantity` INT NOT NULL,
     `user_product_request_id` INT NOT NULL,
@@ -396,25 +386,25 @@ CREATE TABLE IF NOT EXISTS `promel`.`product_request` (
     PRIMARY KEY (`id`),
     CONSTRAINT `fk_product_request_user_product_request1`
     FOREIGN KEY (`user_product_request_id`)
-    REFERENCES `promel`.`user_product_request` (`id`)
+    REFERENCES `user_product_request` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_product_request_product_stock1`
     FOREIGN KEY (`product_stock_id`)
-    REFERENCES `promel`.`product_stock` (`id`)
+    REFERENCES `product_stock` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_product_request_user_product_request1_idx` ON `promel`.`product_request` (`user_product_request_id` ASC) VISIBLE;
+CREATE INDEX `fk_product_request_user_product_request1_idx` ON `product_request` (`user_product_request_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_product_request_product_stock1_idx` ON `promel`.`product_request` (`product_stock_id` ASC) VISIBLE;
+CREATE INDEX `fk_product_request_product_stock1_idx` ON `product_request` (`product_stock_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
 -- Table `promel`.`production_unit_has_honey_production`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `promel`.`production_unit_has_honey_production` (
+CREATE TABLE IF NOT EXISTS `production_unit_has_honey_production` (
     `production_unit_id` INT NOT NULL AUTO_INCREMENT,
     `honey_production_id` INT NOT NULL,
     `number_extracted_frames` INT NOT NULL,
@@ -423,26 +413,26 @@ CREATE TABLE IF NOT EXISTS `promel`.`production_unit_has_honey_production` (
     PRIMARY KEY (`production_unit_id`, `honey_production_id`),
     CONSTRAINT `fk_production_unit_has_honey_production_production_unit1`
     FOREIGN KEY (`production_unit_id`)
-    REFERENCES `promel`.`production_unit` (`id`)
+    REFERENCES `production_unit` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_production_unit_has_honey_production_honey_production1`
     FOREIGN KEY (`honey_production_id`)
-    REFERENCES `promel`.`honey_production` (`id`)
+    REFERENCES `honey_production` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_production_unit_has_honey_production_hive1`
     FOREIGN KEY (`hive_id`)
-    REFERENCES `promel`.`hive` (`id`)
+    REFERENCES `hive` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_production_unit_has_honey_production_honey_production1_idx` ON `promel`.`production_unit_has_honey_production` (`honey_production_id` ASC) VISIBLE;
+CREATE INDEX `fk_production_unit_has_honey_production_honey_production1_idx` ON `production_unit_has_honey_production` (`honey_production_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_production_unit_has_honey_production_production_unit1_idx` ON `promel`.`production_unit_has_honey_production` (`production_unit_id` ASC) VISIBLE;
+CREATE INDEX `fk_production_unit_has_honey_production_production_unit1_idx` ON `production_unit_has_honey_production` (`production_unit_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_production_unit_has_honey_production_hive1_idx` ON `promel`.`production_unit_has_honey_production` (`hive_id` ASC) VISIBLE;
+CREATE INDEX `fk_production_unit_has_honey_production_hive1_idx` ON `production_unit_has_honey_production` (`hive_id` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
