@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Embeddable
 @Data
-public class HiveProductionPerHarvestKey implements Serializable {
+public class HiveProductionPerHarvestEntityKey implements Serializable {
     @Column(name = "honey_production_id")
     private Long honeyProductionId;
 

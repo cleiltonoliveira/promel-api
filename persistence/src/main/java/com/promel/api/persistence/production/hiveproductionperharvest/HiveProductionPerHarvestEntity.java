@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Data
 @Table(name = "hive_production_per_harvest")
-public class HiveProductionPerHarvest {
+public class HiveProductionPerHarvestEntity {
     @EmbeddedId
-    private HiveProductionPerHarvestKey id;
+    private HiveProductionPerHarvestEntityKey id;
 
     @Column(name = "number_of_extracted_frames" )
     @NotNull
