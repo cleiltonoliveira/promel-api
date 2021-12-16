@@ -1,8 +1,8 @@
 package com.promel.api.web.controller.production;
 
 import com.promel.api.domain.model.HoneyProduction;
-import com.promel.api.usecase.production.HoneyProductionCreator;
-import com.promel.api.usecase.production.HoneyProductionFinder;
+import com.promel.api.usecase.production.honeyproduction.HoneyProductionCreator;
+import com.promel.api.usecase.production.honeyproduction.HoneyProductionFinder;
 import com.promel.api.usecase.user.UserAccountFinder;
 import com.promel.api.web.controller.production.dto.HoneyProductionResponse;
 import lombok.AllArgsConstructor;

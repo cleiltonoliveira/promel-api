@@ -1,4 +1,4 @@
-package com.promel.api.usecase.production.adapter;
+package com.promel.api.usecase.production.honeyproduction.adapter;
 
 import com.promel.api.domain.model.HoneyProduction;
 

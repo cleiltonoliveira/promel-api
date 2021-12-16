@@ -1,8 +1,8 @@
-package com.promel.api.usecase.production;
+package com.promel.api.usecase.production.honeyproduction;
 
 import com.promel.api.domain.model.HoneyProduction;
 import com.promel.api.usecase.exception.ResourceNotFoundException;
-import com.promel.api.usecase.production.adapter.HoneyProductionAdapter;
+import com.promel.api.usecase.production.honeyproduction.adapter.HoneyProductionAdapter;
 
 import javax.inject.Named;
 import java.util.List;

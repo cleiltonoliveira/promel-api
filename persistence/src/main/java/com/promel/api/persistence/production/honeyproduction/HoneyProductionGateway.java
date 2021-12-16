@@ -1,7 +1,7 @@
 package com.promel.api.persistence.production.honeyproduction;
 
 import com.promel.api.domain.model.HoneyProduction;
-import com.promel.api.usecase.production.adapter.HoneyProductionAdapter;
+import com.promel.api.usecase.production.honeyproduction.adapter.HoneyProductionAdapter;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
