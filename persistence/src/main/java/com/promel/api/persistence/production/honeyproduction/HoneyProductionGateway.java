@@ -7,7 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -24,6 +26,16 @@ public class HoneyProductionGateway implements HoneyProductionAdapter {
     @Override
     public Optional<HoneyProduction> findByAssociationIdAndEndDate(Long associationId, LocalDateTime endDate) {
         return repository.findByAssociationIdAndEndDate(associationId, endDate).map(this::toDomain);
+    }
+
+    @Override
+    public boolean existsByAssociationIdAndEndDate(Long associationId, LocalDateTime endDate) {
+        return repository.existsByAssociationIdAndEndDate(associationId, endDate);
+    }
+
+    @Override
+    public List<HoneyProduction> findAllHoneyProductionByAssociationId(Long associationId) {
+        return repository.findAllByAssociationId(associationId).stream().map(this::toDomain).collect(Collectors.toList());
     }
 
     private HoneyProduction toDomain(HoneyProductionEntity entity) {

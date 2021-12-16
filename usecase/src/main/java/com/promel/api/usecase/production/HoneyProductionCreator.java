@@ -44,7 +44,7 @@ public class HoneyProductionCreator {
      *   Therefore, we need to check this use case.
      * */
     public void verifyIfAssociationHasHoneyProductionInProgress(Long associationId) {
-        if (honeyProductionFinder.findHoneyProductionInProgress(associationId).isPresent()) {
+        if (honeyProductionFinder.existsHoneyProductionInProgress(associationId)) {
             throw new ResourceConflictException("There is already a honey production in progress");
         }
     }
