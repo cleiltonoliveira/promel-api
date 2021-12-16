@@ -1,4 +1,4 @@
-package com.promel.api.persistence.honeyproduction;
+package com.promel.api.persistence.production.honeyproduction;
 
 import lombok.Data;
 

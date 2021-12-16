@@ -1,4 +1,4 @@
-package com.promel.api.persistence.hiveproductionperharvest;
+package com.promel.api.persistence.production.hiveproductionperharvest;
 
 import lombok.Data;
 
