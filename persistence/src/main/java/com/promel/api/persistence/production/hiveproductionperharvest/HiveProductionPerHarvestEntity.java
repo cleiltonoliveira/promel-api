@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-@Table(name = "hive_production_per_harvest")
+@Table(name = "hive_producton_per_harvest")
 public class HiveProductionPerHarvestEntity {
     @EmbeddedId
     private HiveProductionPerHarvestEntityKey id;

@@ -26,4 +26,8 @@ public class HoneyProductionFinder {
     public List<HoneyProduction> findAllHoneyProductionByAssociation(Long associationId) {
         return honeyProductionAdapter.findAllHoneyProductionByAssociationId(associationId);
     }
+
+    public HoneyProduction findById(Long id) {
+        return honeyProductionAdapter.findById(id).orElseThrow(() -> new ResourceNotFoundException("Honey production not found"));
+    }
 }

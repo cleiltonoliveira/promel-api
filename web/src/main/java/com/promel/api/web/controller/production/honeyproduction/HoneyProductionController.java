@@ -1,10 +1,10 @@
-package com.promel.api.web.controller.production;
+package com.promel.api.web.controller.production.honeyproduction;
 
 import com.promel.api.domain.model.HoneyProduction;
 import com.promel.api.usecase.production.honeyproduction.HoneyProductionCreator;
 import com.promel.api.usecase.production.honeyproduction.HoneyProductionFinder;
 import com.promel.api.usecase.user.UserAccountFinder;
-import com.promel.api.web.controller.production.dto.HoneyProductionResponse;
+import com.promel.api.web.controller.production.honeyproduction.dto.HoneyProductionResponse;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

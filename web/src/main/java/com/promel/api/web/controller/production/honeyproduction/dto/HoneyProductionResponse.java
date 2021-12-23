@@ -1,4 +1,4 @@
-package com.promel.api.web.controller.production.dto;
+package com.promel.api.web.controller.production.honeyproduction.dto;
 
 import lombok.Data;
 

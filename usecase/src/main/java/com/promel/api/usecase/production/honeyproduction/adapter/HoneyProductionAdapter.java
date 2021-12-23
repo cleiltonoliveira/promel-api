@@ -14,4 +14,6 @@ public interface HoneyProductionAdapter {
     boolean existsByAssociationIdAndEndDate(Long associationId, LocalDateTime endDate);
 
     List<HoneyProduction> findAllHoneyProductionByAssociationId(Long associationId);
+
+    Optional<HoneyProduction> findById(Long id);
 }

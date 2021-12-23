@@ -38,6 +38,11 @@ public class HoneyProductionGateway implements HoneyProductionAdapter {
         return repository.findAllByAssociationId(associationId).stream().map(this::toDomain).collect(Collectors.toList());
     }
 
+    @Override
+    public Optional<HoneyProduction> findById(Long id) {
+        return repository.findById(id).map(this::toDomain);
+    }
+
     private HoneyProduction toDomain(HoneyProductionEntity entity) {
         return modelMapper.map(entity, HoneyProduction.class);
     }
