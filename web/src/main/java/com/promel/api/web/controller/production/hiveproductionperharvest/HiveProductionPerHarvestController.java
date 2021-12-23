@@ -2,7 +2,7 @@ package com.promel.api.web.controller.production.hiveproductionperharvest;
 
 import com.promel.api.domain.model.HiveProductionPerHarvest;
 import com.promel.api.domain.model.HiveProductionPerHarvestKey;
-import com.promel.api.usecase.production.hiveproductionperharvest.adapter.HiveProductionPerHarvestCreator;
+import com.promel.api.usecase.production.hiveproductionperharvest.HiveProductionPerHarvestCreator;
 import com.promel.api.web.controller.production.hiveproductionperharvest.dto.HiveProductionPerHarvestResponse;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

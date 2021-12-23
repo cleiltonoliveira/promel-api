@@ -1,8 +1,9 @@
-package com.promel.api.usecase.production.hiveproductionperharvest.adapter;
+package com.promel.api.usecase.production.hiveproductionperharvest;
 
 import com.promel.api.domain.model.HiveProductionPerHarvest;
 import com.promel.api.usecase.exception.CustomForbiddenException;
 import com.promel.api.usecase.exception.ResourceConflictException;
+import com.promel.api.usecase.production.hiveproductionperharvest.adapter.HiveProductionPerHarvestAdapter;
 import com.promel.api.usecase.production.honeyproduction.HoneyProductionFinder;
 import com.promel.api.usecase.user.UserAccountFinder;
 
